@@ -8,12 +8,10 @@ public class Client2
     {
         Console.WriteLine("Hello, I'm client 2! Please make sure that Middleware and the other client is running!");
 
-        string host = "wss://localhost:7298/ws";
-        string groupName = "group_1";
-        Uri uri = new($"{host}?id={Guid.NewGuid()}&groupName={groupName}");
+        Uri uri = new($"{Common.HOST}?id={Guid.NewGuid()}&groupName={Common.GROUP_NAME}");
 
         WsProxyClient wsProxyClient = new(uri);
-        Console.WriteLine($"Connecting to {host} with the following group name: {groupName}");
+        Console.WriteLine($"Connecting to {Common.HOST} with the following group name: {Common.GROUP_NAME}");
         if (await wsProxyClient.TryConnectAsync())
         {
             Console.WriteLine("Connected!");

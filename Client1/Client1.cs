@@ -11,12 +11,10 @@ public class Client1
         Console.WriteLine("Press enter to continue...");
         Console.ReadLine();
 
-        string host = "wss://localhost:7298/ws";
-        string groupName = "group_1";
-        Uri uri = new($"{host}?id={Guid.NewGuid()}&groupName={groupName}");
+        Uri uri = new($"{Common.HOST}?id={Guid.NewGuid()}&groupName={Common.GROUP_NAME}");
 
         WsProxyClient wsProxyClient = new(uri);
-        Console.WriteLine($"Connecting to {host} with the following group name: {groupName}");
+        Console.WriteLine($"Connecting to {Common.HOST} with the following group name: {Common.GROUP_NAME}");
         if (await wsProxyClient.TryConnectAsync())
             Console.WriteLine("Connected!");
         else
