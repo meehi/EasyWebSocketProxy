@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyWebSocketProxy", "EasyWebSocketProxy\EasyWebSocketProxy.csproj", "{38F0251E-7E73-4457-9D6E-5B5D70116ECC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleApp", "SampleApp", "{FFF05D0A-D5AE-4840-BF14-11D90E778CC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client1", "Client1\Client1.csproj", "{70C7782B-BEDC-4D71-A4F8-F62B28F29F28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware", "Middleware\Middleware.csproj", "{651F53E4-5D93-4786-8F0C-0DAC19B81C32}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedData", "SharedData\SharedData.shproj", "{4D7EC18C-98C4-4613-9A57-4FB54D3135A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client2", "Client2\Client2.csproj", "{E9FCF610-5F71-4834-8B39-A78053761985}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38F0251E-7E73-4457-9D6E-5B5D70116ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F0251E-7E73-4457-9D6E-5B5D70116ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F0251E-7E73-4457-9D6E-5B5D70116ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F0251E-7E73-4457-9D6E-5B5D70116ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C7782B-BEDC-4D71-A4F8-F62B28F29F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C7782B-BEDC-4D71-A4F8-F62B28F29F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C7782B-BEDC-4D71-A4F8-F62B28F29F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C7782B-BEDC-4D71-A4F8-F62B28F29F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{651F53E4-5D93-4786-8F0C-0DAC19B81C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{651F53E4-5D93-4786-8F0C-0DAC19B81C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{651F53E4-5D93-4786-8F0C-0DAC19B81C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{651F53E4-5D93-4786-8F0C-0DAC19B81C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9FCF610-5F71-4834-8B39-A78053761985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9FCF610-5F71-4834-8B39-A78053761985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9FCF610-5F71-4834-8B39-A78053761985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9FCF610-5F71-4834-8B39-A78053761985}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70C7782B-BEDC-4D71-A4F8-F62B28F29F28} = {FFF05D0A-D5AE-4840-BF14-11D90E778CC0}
+		{651F53E4-5D93-4786-8F0C-0DAC19B81C32} = {FFF05D0A-D5AE-4840-BF14-11D90E778CC0}
+		{4D7EC18C-98C4-4613-9A57-4FB54D3135A2} = {FFF05D0A-D5AE-4840-BF14-11D90E778CC0}
+		{E9FCF610-5F71-4834-8B39-A78053761985} = {FFF05D0A-D5AE-4840-BF14-11D90E778CC0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {331D6565-95C7-4716-82B0-A4FCFD944AB3}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedData\SharedData.projitems*{4d7ec18c-98c4-4613-9a57-4fb54d3135a2}*SharedItemsImports = 13
+		SharedData\SharedData.projitems*{70c7782b-bedc-4d71-a4f8-f62b28f29f28}*SharedItemsImports = 5
+		SharedData\SharedData.projitems*{e9fcf610-5f71-4834-8b39-a78053761985}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
