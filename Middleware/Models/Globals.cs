@@ -6,5 +6,4 @@ namespace Middleware.Models
     {
         public static ConcurrentDictionary<string, List<WebSocketSession>> WebSocketGroups = new();
     }
-
 }

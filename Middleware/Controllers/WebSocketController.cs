@@ -11,10 +11,8 @@ namespace Middleware.Controllers
         {
             if (HttpContext.WebSockets.IsWebSocketRequest)
             {
-                using (WebSocket webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync())
-                {
-                    await ProxyForward(webSocket);
-                }
+                using WebSocket webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
+                await ProxyForward(webSocket);
             }
             else
             {
@@ -24,8 +22,12 @@ namespace Middleware.Controllers
 
         private async Task ProxyForward(WebSocket webSocket)
         {
-            Guid id = new(HttpContext.Request.Query["id"]);
-            string groupName = HttpContext.Request.Query["groupName"];
+            string? idString = HttpContext.Request.Query["id"];
+            string? groupName = HttpContext.Request.Query["groupName"];
+            if (string.IsNullOrEmpty(idString) || string.IsNullOrEmpty(groupName))
+                return;
+
+            Guid id = new(idString);
             if (!Globals.WebSocketGroups.ContainsKey(groupName))
                 Globals.WebSocketGroups.TryAdd(groupName, new() { new() { Id = id } });
             else
@@ -37,8 +39,8 @@ namespace Middleware.Controllers
             new Task(async () =>
             {
                 while (!cts.IsCancellationRequested)
-                    if (currentSession.Message.TryDequeue(out WebSocketMessage message))
-                        if (webSocket.State == WebSocketState.Open)
+                    if (currentSession.Message.TryDequeue(out WebSocketMessage? message))
+                        if (webSocket.State == WebSocketState.Open && message.Data != null)
                             await webSocket.SendAsync(new ArraySegment<byte>(message.Data), message.MessageType, true, CancellationToken.None);
             }).Start();
 
@@ -71,7 +73,7 @@ namespace Middleware.Controllers
             cts.Cancel();
             Globals.WebSocketGroups[groupName].Remove(currentSession);
             if (Globals.WebSocketGroups[groupName].Count == 0)
-                Globals.WebSocketGroups.TryRemove(groupName, out List<WebSocketSession> sessions);
+                Globals.WebSocketGroups.TryRemove(groupName, out List<WebSocketSession>? sessions);
         }
     }
 

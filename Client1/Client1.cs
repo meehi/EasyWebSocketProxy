@@ -27,7 +27,7 @@ public class Client1
         Console.WriteLine();
         Console.WriteLine("Press enter to send Type message to Client 2...");
         Console.ReadLine();
-        await wsProxyClient.SendAsync(new SocketMessage() { Message = "Hello from Client 1" });
+        await wsProxyClient.SendAsync<SocketMessage>(new() { Message = "Hello from Client 1" });
         Console.WriteLine("Type message sent!");
 
         Console.WriteLine();

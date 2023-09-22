@@ -4,7 +4,7 @@ namespace Middleware.Models
 {
     public class WebSocketMessage
     {
-        public byte[] Data { get; set; }
+        public byte[]? Data { get; set; }
         public WebSocketMessageType MessageType { get; set; }
     }
 }
