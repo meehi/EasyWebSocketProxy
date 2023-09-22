@@ -11,14 +11,18 @@ WsProxyClient wsProxyClient = new(uri);
 await wsProxyClient.TryConnectAsync();
 //send some typed message to the other client with the same group connected
 await wsProxyClient.SendAsync<SocketMessage>(new() { Message = "Hello from Client 1" });
+//send binary data
+byte[] data = Encoding.UTF8.GetBytes("Hello from Client 1! This is going to be a byte array message!");
+await wsProxyClient.SendAsync(data);
 //...
 await wsProxyClient.TryDisconnectAsync();
 
-//receive message [CLIENT2]
+//receive message [CLIENT 2]
 Uri uri = new($"wss://localhost:7298/ws?id={Guid.NewGuid()}&groupName=group_1");  //always include an ID and a group name in the URL
 WsProxyClient wsProxyClient = new(uri);
 await wsProxyClient.TryConnectAsync();
 wsProxyClient.On<SocketMessage>((socketMessage) => Console.WriteLine($"{socketMessage.Message}"));
+wsProxyClient.On<byte[]>((data) => Console.WriteLine($"Bytes received. Length: {data.Length}"));
 //...
 await wsProxyClient.TryDisconnectAsync();
 ```
@@ -91,4 +95,4 @@ private async Task ProxyForward(WebSocket webSocket)
 }
 ```
 
-If you are having trouble using the websocket server then please install the Websocket Protocoll: https://learn.microsoft.com/en-us/iis/configuration/system.webserver/websocket
+If you are having trouble using the websocket server then please enable the Websocket Protocoll: https://learn.microsoft.com/en-us/iis/configuration/system.webserver/websocket
