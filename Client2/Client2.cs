@@ -24,19 +24,25 @@ public class Client2
             return;
         }
 
-        wsProxyClient.On<SocketMessage>(ProcessSocketMessage);
-        wsProxyClient.On<byte[]>(ProcessBinaryMessage);
+        wsProxyClient.On<SocketMessage>(async (socketMessage) =>
+        {
+            Console.WriteLine($"Type message received. Message: {socketMessage.Message}");
+            if (socketMessage.ReplyRequired)
+                await wsProxyClient.ReplyToAsync(socketMessage, new SocketMessage() { Message = "This is my answer from Client 2!" });
+        });
+        wsProxyClient.On<byte[]>((data) => Console.WriteLine($"Bytes received. Length: {data.Length}"));
+        wsProxyClient.On<string>(async (question) =>
+        {
+            Console.WriteLine($"{question}");
+            await wsProxyClient.ReplyToAsync(question, true);
+        });
+        wsProxyClient.On<List<string>>((lines) =>
+        {
+            foreach(string line in lines)
+                Console.WriteLine(line);
+        });
 
         Console.ReadLine();
-    }
-
-    private static void ProcessSocketMessage(SocketMessage socketMessage)
-    {
-        Console.WriteLine($"Type message received. Message: {socketMessage.Message}");
-    }
-
-    private static void ProcessBinaryMessage(byte[] data)
-    {
-        Console.WriteLine($"Bytes received. Length: {data.Length}");
+        await wsProxyClient.TryDisconnectAsync();
     }
 }

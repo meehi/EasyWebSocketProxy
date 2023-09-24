@@ -35,7 +35,31 @@ public class Client1
         Console.ReadLine();
         byte[] data = Encoding.UTF8.GetBytes("Hello from Client 1! This is going to be a byte array message!");
         await wsProxyClient.SendAsync(data);
-        Console.WriteLine("Byte array sent! Good bye!");
+        Console.WriteLine("Byte array sent!");
+
+        Console.WriteLine();
+        Console.WriteLine("Press enter to send Type message and wait for the answer...");
         Console.ReadLine();
+        var response = await wsProxyClient.SendAndWaitForAnswerAsync<SocketMessage>(new() { Message = "This message is waiting for an answer!", ReplyRequired = true }, typeof(SocketMessage), TimeSpan.FromSeconds(120));
+        if (response != null)
+            Console.WriteLine(((SocketMessage)response).Message);
+
+        Console.WriteLine();
+        Console.WriteLine("Press enter to ask a question from Client 2...");
+        Console.ReadLine();
+        response = await wsProxyClient.SendAndWaitForAnswerAsync("This is a question. How do you do?", typeof(bool), TimeSpan.FromSeconds(10));
+        if (response != null)
+        {
+            response = (bool)response;
+            Console.WriteLine($"The answer is {response}");
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Press enter to send a list of string to Client 2...");
+        Console.ReadLine();
+        await wsProxyClient.SendAsync<List<string>>(new() { "Line 1", "Line 2" });
+
+        Console.ReadLine();
+        await wsProxyClient.TryDisconnectAsync();
     }
 }

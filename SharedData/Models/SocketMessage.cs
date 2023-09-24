@@ -2,6 +2,7 @@
 {
     public class SocketMessage
     {
-        public string Message { get; set; }
+        public string? Message { get; set; }
+        public bool ReplyRequired { get; set; }
     }
 }
